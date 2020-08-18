@@ -20,12 +20,19 @@ class App extends React.Component {
     this.setState({ todoList });
     e.target.reset();
   };
+
+  removeItem = e => {
+    //TODO!
+  }
   render() {
     return (
       <>
         <header>A Todo List</header>
         <AddTodo addNew={this.addNew} />
-        <Todos todoList={this.state.todoList} />
+        <Todos 
+        todoList={this.state.todoList} 
+        removeItem ={this.removeItem}
+         />
       </>
     );
   }
