@@ -6,33 +6,34 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      todoList: []
+      todoList: [
+        { content: "Do dishes", id: 5 },
+        { content: "Hose down feet", id: 10 }
+      ]
     };
   }
   addNew = (e) => {
     e.preventDefault();
     const newItem = {};
-    newItem.todo = e.target.newitem.value;
-    newItem.key = Math.random();
-
-    // e.target.newitem.value, {Math.random()};
+    newItem.content = e.target.newitem.value;
+    newItem.id = Math.random();
     const todoList = [...this.state.todoList, newItem];
     this.setState({ todoList });
     e.target.reset();
   };
 
-  removeItem = e => {
-    //TODO!
-  }
+  removeItem = (id) => {
+    const todoList = this.state.todoList.filter((todo) => {
+      return todo.id !== id;
+    });
+    this.setState({ todoList });
+  };
   render() {
     return (
       <>
         <header>A Todo List</header>
         <AddTodo addNew={this.addNew} />
-        <Todos 
-        todoList={this.state.todoList} 
-        removeItem ={this.removeItem}
-         />
+        <Todos todoList={this.state.todoList} removeItem={this.removeItem} />
       </>
     );
   }
