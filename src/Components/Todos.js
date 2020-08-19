@@ -29,7 +29,7 @@ const Todos = ({ todoList, removeItem, toggleComplete }) => {
     }
     // If there aren't any todos, congratulations!
     else {
-      return <p>All caught up! Yay!</p>;
+      return <h3 className="center-align">All caught up! Yay!</h3>;
     }
   };
   return (

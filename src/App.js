@@ -6,12 +6,12 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      todoList: [
-        { content: "Sample To-Do #1", isComplete: false, id: 1 },
-        { content: "Sample To-Do #2", isComplete: false, id: 2 },
-        { content: "Sample To-Do #3", isComplete: false, id: 3 }
-      ]
+      todoList: []
     };
+  }
+
+  componentDidMount() {
+    this.populateTodos();
   }
 
   addNew = (e) => {
@@ -21,14 +21,25 @@ class App extends React.Component {
     newItem.isComplete = false;
     newItem.id = Math.random();
     const todoList = [...this.state.todoList, newItem];
+    localStorage.setItem("todoList", JSON.stringify(todoList));
     this.setState({ todoList });
     e.target.reset();
+  };
+  //Checks local storage for existing todo list, and if none found, fills out a sample one
+  populateTodos = () => {
+    const todoList = JSON.parse(localStorage.getItem("todoList")) || [
+      { content: "Sample To-Do #1", isComplete: false, id: 1 },
+      { content: "Sample To-Do #2", isComplete: false, id: 2 },
+      { content: "Sample To-Do #3", isComplete: false, id: 3 }
+    ];
+    this.setState({ todoList });
   };
 
   removeItem = (id) => {
     const todoList = this.state.todoList.filter((todo) => {
       return todo.id !== id;
     });
+    localStorage.setItem("todoList", JSON.stringify(todoList));
     this.setState({ todoList });
   };
 
