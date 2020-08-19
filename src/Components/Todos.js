@@ -6,14 +6,23 @@ const Todos = ({ todoList, removeItem, toggleComplete }) => {
     if (todoList.length) {
       return todoList.map((todo) => {
         return (
-          <li key={todo.id}>
-            <span
+          <li key={todo.id} className="collection-item todo">
+            <div
               className={todo.isComplete ? "completed" : null}
               onClick={() => toggleComplete(todo.id)}
             >
               {todo.content}
-            </span>
-            <button onClick={() => removeItem(todo.id)}>Delete</button>
+            </div>
+            <div className="secondary-content">
+              <button className="btn-floating waves-light red">
+                <i
+                  onClick={() => removeItem(todo.id)}
+                  className="material-icons"
+                >
+                  delete_forever
+                </i>
+              </button>
+            </div>
           </li>
         );
       });
@@ -25,7 +34,7 @@ const Todos = ({ todoList, removeItem, toggleComplete }) => {
   };
   return (
     <>
-      <ul>{renderTodos()}</ul>
+      <ul className="collection">{renderTodos()}</ul>
     </>
   );
 };

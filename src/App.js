@@ -40,15 +40,21 @@ class App extends React.Component {
   };
   render() {
     return (
-      <>
-        <header>A Todo List</header>
-        <AddTodo addNew={this.addNew} />
-        <Todos
-          todoList={this.state.todoList}
-          removeItem={this.removeItem}
-          toggleComplete={this.toggleComplete}
-        />
-      </>
+      <div className="container">
+        <header>
+          <h1 className="indigo lighten-4 center-align">
+            Yet Another Todo List
+          </h1>
+        </header>
+        <main className="container">
+          <AddTodo addNew={this.addNew} />
+          <Todos
+            todoList={this.state.todoList}
+            removeItem={this.removeItem}
+            toggleComplete={this.toggleComplete}
+          />
+        </main>
+      </div>
     );
   }
 }
