@@ -1,14 +1,18 @@
 import React from "react";
 
-const Todos = ({ todoList, removeItem }) => {
+const Todos = ({ todoList, removeItem, toggleComplete }) => {
   const renderTodos = () => {
     // If we got some todos on the list, render them
     if (todoList.length) {
       return todoList.map((todo) => {
         return (
           <li key={todo.id}>
-            <input type="checkbox" id={todo.id} />
-            {todo.content}
+            <span
+              className={todo.isComplete ? "completed" : null}
+              onClick={() => toggleComplete(todo.id)}
+            >
+              {todo.content}
+            </span>
             <button onClick={() => removeItem(todo.id)}>Delete</button>
           </li>
         );

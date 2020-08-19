@@ -7,15 +7,18 @@ class App extends React.Component {
     super(props);
     this.state = {
       todoList: [
-        { content: "Do dishes", id: 5 },
-        { content: "Hose down feet", id: 10 }
+        { content: "Sample To-Do #1", isComplete: false, id: 1 },
+        { content: "Sample To-Do #2", isComplete: false, id: 2 },
+        { content: "Sample To-Do #3", isComplete: false, id: 3 }
       ]
     };
   }
+
   addNew = (e) => {
     e.preventDefault();
     const newItem = {};
     newItem.content = e.target.newitem.value;
+    newItem.isComplete = false;
     newItem.id = Math.random();
     const todoList = [...this.state.todoList, newItem];
     this.setState({ todoList });
@@ -28,12 +31,23 @@ class App extends React.Component {
     });
     this.setState({ todoList });
   };
+
+  toggleComplete = (id) => {
+    const todoList = this.state.todoList;
+    const index = this.state.todoList.findIndex((todo) => todo.id === id);
+    todoList[index].isComplete = !todoList[index].isComplete;
+    this.setState({ todoList });
+  };
   render() {
     return (
       <>
         <header>A Todo List</header>
         <AddTodo addNew={this.addNew} />
-        <Todos todoList={this.state.todoList} removeItem={this.removeItem} />
+        <Todos
+          todoList={this.state.todoList}
+          removeItem={this.removeItem}
+          toggleComplete={this.toggleComplete}
+        />
       </>
     );
   }
